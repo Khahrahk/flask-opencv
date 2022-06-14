@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="col-md-7" style="margin-left: auto; margin-right: auto; margin-top:2%; margin-bottom:10%;">
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    <br>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header"><h3 class="h4 mb-0 font-weight-normal">Регистрация</h3></div>
+        <div class="card-body">
+            <form action="/register" method="post" class="form-contact">
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label text-md-end">Имя</label>
+                    <div class="col-md-9">
+                        <input id="name" type="text" class="form-control" name="name" required autocomplete="name"
+                               autofocus>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label text-md-end">Email адрес</label>
+                    <div class="col-md-9">
+                        <input id="email" type="text" class="form-control" name="email" required
+                               autocomplete="email"
+                               autofocus>
+                    </div>
+                </div>
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label text-md-end">Пароль</label>
+                    <div class="col-md-9">
+                        <input id="psw" type="password" class="form-control" name="psw" required autocomplete="password"
+                               autofocus>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label text-md-end">Повтор пароля</label>
+                    <div class="col-md-9">
+                        <input id="psw2" type="password" class="form-control" name="psw2" required
+                               autocomplete="password"
+                               autofocus>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-md-4 offset-md-3">
+                        <div class="example-2">
+                            <div class="form-group">
+                                <input type="submit" name="submit" id="submit" value="Загрузить" class="input-file">
+                                <label for="submit" class="btn btn-tertiary js-labelFile">
+                                    <span class="js-fileName">Регистрация</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 offset-md-0">
+                        <a class="btn btn-link" href="{{url_for('login')}}">
+                            Войти
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

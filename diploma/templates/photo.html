@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="col-md-6" style="margin-left: auto; margin-right: auto; margin-top:2%; margin-bottom:10%;">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="h3 mb-0 font-weight-normal">Загрузите любое фото</h1>
+        </div>
+        <div class="card-body">
+            <form class="form-signin" method=post enctype=multipart/form-data>
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                <div class="example-1">
+                    <div class="form-group">
+                        <label class="label">
+                            <i class="material-icons">attach_file</i>
+                            <span class="title">Добавить файл</span>
+                            <input type="file" name="file" id="file">
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <div class="example-2">
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit" value="Загрузить" class="input-file">
+                        <label for="submit" class="btn btn-tertiary js-labelFile">
+                            <span class="js-fileName">Загрузить</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="welcomeDiv" style="display:none; font-size: 18px; padding-top: 10px" class="answer_list">Подождите, фото
+        обрабатывается
+    </div>
+</div>
+<script>
+function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "block";
+}
+
+
+</script>
+<script type="text/javascript">
+      $('#inputfile').bind('change', function() {
+          let fileSize = this.files[0].size/100000/100000; // this gives in MB
+          if (fileSize > 1) {
+            $("#inputfile").val(null);
+            alert('file is too big. images more than 1MB are not allowed')
+            return
+          }
+
+          let ext = $('#inputfile').val().split('.').pop().toLowerCase();
+          if($.inArray(ext, ['mp4']) == -1) {
+            $("#inputfile").val(null);
+            alert('only jpeg/jpg files are allowed!');
+          }
+      });
+
+
+</script>
+{% endblock %}

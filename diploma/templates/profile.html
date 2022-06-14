@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="col-md-7" style="margin-right: auto; margin-left:auto;">
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    {% endfor %}
+</div>
+<div class="row" style="margin-right: auto; margin-left:auto;">
+    <div class="col-md-2"></div>
+    <div class="col-md-3" style="margin-top:2%; margin-bottom:10%;">
+        <div class="card" style="width: auto">
+            <div class="card-body" style="width: auto">
+                <div class="profile-ava" style="border-radius: 5px">
+                    <img src="{{ url_for('userava') }}" height="auto" width="auto" style="border-radius: 5px">
+                </div>
+                <div class="profile-load">
+                    <form action="{{url_for('upload')}}" method="POST" enctype="multipart/form-data">
+                        <div class="example-2">
+                            <div class="form-group">
+                                <input type="file" name="file" id="file" class="input-file">
+                                <label for="file" class="btn btn-tertiary js-labelFile">
+                                    <span class="js-fileName">Выберите файл</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="example-2">
+                            <div class="form-group">
+                                <input type="submit" name="submit" id="submit" value="Загрузить" class="input-file">
+                                <label for="submit" class="btn btn-tertiary js-labelFile">
+                                    <span class="js-fileName">Загрузить</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5" style="margin-top:2%; margin-bottom:10%;">
+        <div class="card" style="width: auto">
+            <div class="card-body" style="width: auto">
+                <div class="name" style="text-align:left; font-weight: 600; font-size: 18px">{{ current_user.getName()
+                    }}
+                </div>
+                <hr>
+                <div style="display: inline-block; float: left;">Email:</div>
+                {{ current_user.getEmail() }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

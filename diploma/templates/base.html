@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    </style>
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet"/>
+    <title>Комплексная безопасность города</title>
+</head>
+<div class="mainmenu">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top"
+         style="background-color: rgba(249, 249, 249, 0.9); padding-left: 155px; padding-right: 155px;">
+        <img src="static/images/logo.png" width="40" height="40">
+        <a class="navbar-brand" href="/" style="font-weight: 400; padding-left: 15px">Комплексная безопасность города</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" style="padding-top: 5px">
+                    <a class="nav-link" href="/video">Видео</a>
+                </li>
+                <li class="nav-item" style="padding-top: 5px">
+                    <a class="nav-link" href="/photo">Картинка</a>
+                </li>
+                <li class="nav-item" style="padding-top: 5px">
+                    <a class="nav-link" href="/post">Статьи</a>
+                </li>
+                {% if current_user.is_authenticated != False %}
+                <li class="nav-item" style="padding-top: 5px">
+                    <a class="nav-link" href="/add_post">Добавить статью</a>
+                </li>
+                {% if current_user.getAdmin() == 1 %}
+                <li class="nav-item" style="padding-top: 5px">
+                    <a class="nav-link" href="/admin">Панель администратора</a>
+                </li>
+                {% endif %}
+                {% endif %}
+                {% if current_user.is_authenticated != False %}
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ url_for('userava') }}" alt="profile"
+                             class="rounded-circle" style="width: 2.0rem; height: 2.0rem">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item disabled" href="">{{ current_user.getName() }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/profile">Мой аккаунт</a>
+                        <a class="dropdown-item" href="/settings">Настройки</a>
+                        <a class="dropdown-item" href="{{url_for('logout')}}">Выход</a>
+                    </div>
+                    {% endif %}
+                    {% if current_user.is_authenticated != True %}
+                <li class="nav-item dropdown active" style="padding-top: 5px">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Аккаунт
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item disabled" href="">Мой аккаунт</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/register">Регистрация</a>
+                        <a class="dropdown-item" href="/login">Вход</a>
+                    </div>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<body class="text-center">
+<div class="container">
+    {% block content -%}
+
+    {% endblock -%}
+</div>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-2 border-top fixed-bottom">
+    <p class="col-md-4 mb-2 text-muted">© 2022 Безденежных Виктор Евгеньевич ВБ-435/к</p>
+    <div class="col-md-4">
+        <a href="https://github.com/Khahrahk/diploma1" class="fa fa-github"></a>
+        <a href="https://vk.com/2girls1cup_rectal" class="fa fa-vk"></a>
+        <a href="https://mail.ru/" class="fa fa-envelope"></a>
+    </div>
+</footer>
+<script src="//code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+</body>
+</html>

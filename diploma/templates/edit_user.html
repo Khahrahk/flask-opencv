@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+            <!-- Collapse 1 -->
+            <a
+                    class="list-group-item list-group-item-action py-2 ripple"
+                    aria-current="true"
+                    data-mdb-toggle="collapse"
+                    href="/admin"
+                    aria-expanded="true"
+                    aria-controls="collapseExample1"
+            >
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Меню</span>
+            </a>
+            <br>
+
+            <!-- Collapsed content -->
+            <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                <li class="list-group-item py-1">
+                    <h6>Пользователь</h6>
+                </li>
+                <a
+                        class="list-group-item list-group-item-action py-2 ripple"
+                        aria-current="true"
+                        data-mdb-toggle="collapse"
+                        href="/delete_user"
+                        aria-expanded="true"
+                        aria-controls="collapseExample1"
+                >
+                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Удаление</span>
+                </a>
+                <a
+                        class="list-group-item list-group-item-action py-2 ripple"
+                        aria-current="true"
+                        data-mdb-toggle="collapse"
+                        href="/edit_user"
+                        aria-expanded="true"
+                        aria-controls="collapseExample1"
+                >
+                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Редактирование</span>
+                </a>
+                <br>
+
+                <li class="list-group-item py-1 ">
+                    <h6>Посты</h6>
+                </li>
+
+                <a
+                        class="list-group-item list-group-item-action py-2 ripple"
+                        aria-current="true"
+                        data-mdb-toggle="collapse"
+                        href="/delete_post"
+                        aria-expanded="true"
+                        aria-controls="collapseExample1"
+                >
+                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Удаление</span>
+                </a>
+                <a
+                        class="list-group-item list-group-item-action py-2 ripple"
+                        aria-current="true"
+                        data-mdb-toggle="collapse"
+                        href="/edit_post"
+                        aria-expanded="true"
+                        aria-controls="collapseExample1"
+                >
+                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Редактирование</span>
+                </a>
+            </ul>
+            <!-- Collapse 1 -->
+        </div>
+    </div>
+</nav>
+<div class="col-md-7" style="margin-left: auto; margin-right: auto; margin-top:2%; margin-bottom:10%;">
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    <br>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="h4 mb-0 font-weight-normal">Редактирование пользователя</h3>
+        </div>
+        <div class="card-body">
+            <form action="{{url_for('editUser')}}" method="post">
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label text-md-end">Email адрес</label>
+                    <div class="col-md-9">
+                        <input id="email_select" type="email" class="form-control" name="email_select" required
+                               autofocus>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label text-md-end">Имя</label>
+                    <div class="col-md-9">
+                        <input id="name" type="text" class="form-control" name="name" required autofocus>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label text-md-end">Администратор</label>
+                    <div class="col-md-3 pt-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="is_admin" id="inlineRadio1"
+                                   value="1">
+                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="is_admin" id="inlineRadio2"
+                                   value="0">
+                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-md-4 offset-md-3">
+                        <div class="example-2">
+                            <div class="form-group">
+                                <input type="submit" name="submit" id="submit" value="Загрузить" class="input-file">
+                                <label for="submit" class="btn btn-tertiary js-labelFile">
+                                    <span class="js-fileName">Удалить</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="col-md-9" style="margin-left: auto; margin-right: auto;">
+    <div class="card" style="border-radius: 5px">
+        <div class="card-body">
+            {{ post | safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

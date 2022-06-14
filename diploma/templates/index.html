@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row" style="width:auto">
+    <div class="col-md-5" style="margin-left: auto; margin-right: auto; margin-top:2%; margin-bottom:2%;">
+        <div class="card" style="border-radius: 5px">
+            <div class="card-header"><h1 class="h3 mb-0 font-weight-normal">Оставьте заявку</h1></div>
+            <div class="card-body">
+                <p style="text-align: left">
+                    Если вы заинтересованы - можете оставить заявку, и мы обязательно с вами свяжемся.
+                </p>
+                <hr>
+                <form action="{{url_for('addRequest')}}" method="post">
+                    <div class="row mb-3">
+                        <label class="col-md-3 col-form-label text-md-end">Ваш email</label>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" name="email" required autofocus>
+                        </div>
+                    </div>
+                    <div class="row mb-0">
+                        <div class="col-md-4 offset-md-3">
+                            <div class="example-2">
+                                <div class="form-group">
+                                    <input type="submit" name="submit" id="submit" value="Загрузить" class="input-file">
+                                    <label for="submit" class="btn btn-tertiary js-labelFile">
+                                        <span class="js-fileName">Отправить</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="slider">
+        <a href="#" class="control_next">></a>
+        <a href="#" class="control_prev"><</a>
+        <ul>
+            <li style="background: #eee;"><img src="static/data/photos/1prikol2.jpg" width="500" height="290"
+                                               style="padding-bottom:5px; border-radius:5px;"></li>
+            <li style="background: #eee;"><img src="static/data/photos/1268896517.jpg" width="500" height="290"
+                                               style="padding-bottom:5px; border-radius:5px;"></li>
+            <li style="background: #eee;"><img src="static/data/photos/139564423-business-people-with-gun.webp" width="500" height="290"
+                                               style="padding-bottom:5px; border-radius:5px;"></li>
+            <li style="background: #eee;"><img src="static/data/photos/1classy-undercover-agent-senior-old-260nw-1375127210.jpg" width="500" height="290"
+                                               style="padding-bottom:5px; border-radius:5px;"></li>
+
+        </ul>
+    </div>
+    <div class="slider_option">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7" style="margin-left: auto; margin-right: auto; margin-top:2%; margin-bottom:10%;">
+        <div class="card" style="border-radius: 5px">
+            <div class="card-header"><h1 class="h3 mb-0 font-weight-normal">Контакты</h1></div>
+            <div class="card-body">
+                <p style="text-align: left">
+                    Телефон: +79087052645
+                    <br>
+                    Адрес: г. Челябинск, ул. Героев Танкограда, 75
+                </p>
+                <hr>
+                <p style="text-align: left">
+                    Мы на карте:
+                </p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14790.594280787576!2d61.4620888894287!3d55.15774697014009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c5ed0113b0b203%3A0xc7556c9758c12d39!2z0KHQsNC0INCf0L7QsdC10LTRiw!5e0!3m2!1sru!2sru!4v1654940487584!5m2!1sru!2sru"
+                        width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4" style="margin-left: auto; margin-right: auto; margin-top:2%; margin-bottom:10%;">
+        <div class="card" style="border-radius: 5px">
+            <div class="card-header"><h1 class="h3 mb-0 font-weight-normal">О нас</h1></div>
+            <div class="card-body">
+                <p style="text-align: left">
+                    Мы молодая компания, которая занимается нейронными сетями, представляем вашему вниманию одну
+                    из наших последних разработок, систему распознавания оружия
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+
+  $('#checkbox').change(function(){
+    setInterval(function () {
+        moveRight();
+    }, 3000);
+  });
+
+	var slideCount = $('#slider ul li').length;
+	var slideWidth = $('#slider ul li').width();
+	var slideHeight = $('#slider ul li').height();
+	var sliderUlWidth = slideCount * slideWidth;
+
+	$('#slider').css({ width: slideWidth, height: slideHeight });
+
+	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: + slideWidth
+        }, 200, function () {
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: - slideWidth
+        }, 200, function () {
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    $('a.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('a.control_next').click(function () {
+        moveRight();
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+{% endblock %}

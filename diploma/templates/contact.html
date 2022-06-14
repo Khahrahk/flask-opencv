@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="col-md-4" style="margin-left: auto; margin-right: auto; margin-top:5%; margin-bottom:10%;">
+    <div class="panel panel-default" style="border-radius: 5px">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            {% for cat, msg in get_flashed_messages(True) %}
+            <div class="flash {{cat}}">{{msg}}</div>
+            {% endfor %}
+            <form action="/contact" method="post" class="form-contact">
+                <p><label>Имя: </label> <input type="text" name="username" value="" required/>
+                <p><label>Email: </label> <input type="text" name="email" value="" required/>
+                <p><label>Сообщение:</label>
+                <p><textarea name="message" rows=7 cols=40></textarea>
+                <p><input type="submit" value="Отправить"/>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

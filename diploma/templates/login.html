@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="col-md-7" style="margin-left: auto; margin-right: auto; margin-top:2%; margin-bottom:10%;">
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    <br>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="h4 mb-0 font-weight-normal">Вход</h3>
+        </div>
+        <div class="card-body">
+            <form
+                    {% if request.args.get(
+            'next') %}
+            action="{{ url_for('login', next=request.args.get('next')) }}"
+            {% else %}
+            action="{{ url_for('login') }}"
+            {% endif %}
+            method="post" class="form-contact">
+            <div class="row mb-3">
+
+                <label class="col-md-3 col-form-label text-md-end">Email адрес</label>
+                <div class="col-md-9">
+                    <input id="email" type="email" class="form-control" name="email" required autocomplete="email"
+                           autofocus>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-md-3 col-form-label text-md-end">Пароль</label>
+                <div class="col-md-9">
+                    <input id="password" type="password" class="form-control" name="psw" required autocomplete="email"
+                           autofocus>
+                </div>
+            </div>
+            <div class="row mb-1 ml-0 mr-1">
+                <div class="col-md-6 offset-md-2">
+                    <div class="form-check">
+                        <p><input class="form-check-input" type="checkbox" id="remember" name="remainme"/>
+                            Запомнить меня
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-0">
+                <div class="col-md-4 offset-md-3">
+                    <div class="example-2">
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" value="Загрузить" class="input-file">
+                            <label for="submit" class="btn btn-tertiary js-labelFile">
+                                <span class="js-fileName">Войти</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 offset-md-0">
+                    <a class="btn btn-link" href="{{url_for('register')}}">
+                        Регистрация
+                    </a>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
